@@ -1,0 +1,46 @@
+@startuml 属性API
+scale 2
+interface ServletContext{
+getInitParameter(String)
+getInitParameterNames()
+---------
+getAttribute(String name)
+setAttribute(String name,Object value)
+removeAttribute(String name)
+getAttributeName()
+--------
+getMajorVersion()
+//...more methods()
+}
+
+interface ServletRequest{
+    getContentType()
+    getInitParameter(String)
+    ---------
+    getAttribute(String name)
+    setAttribute(String name,Object value)
+    removeAttribute(String name)
+    getAttributeName()
+    --------
+    //...more methods()
+}
+interface HttpServletRequest{
+    getCookies()
+    getHeader(String)
+    getQueryString()
+    //...more methods()
+}
+interface HttpSession{
+    getAttribute(String name)
+    setAttribute(String name,Object value)
+    removeAttribute(String name)
+    getAttributeName()
+    --------
+    setMaxInactiveInterval(int)
+    getId()
+    //...more methods()
+}
+
+ServletRequest <|-- HttpServletRequest
+note right of HttpServletRequest: "没有与属性有关的方法"
+@enduml

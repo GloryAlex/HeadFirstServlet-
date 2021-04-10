@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--    <servlet>-->
+    <!--        <servlet-name>Email</servlet-name>-->
+    <!--        <servlet-class>Chapter5.GetEmail</servlet-class>-->
+    <!--        <init-param>-->
+    <!--            <param-name>adminEmail</param-name>-->
+    <!--            <param-value>likeware@wick.com</param-value>-->
+    <!--        </init-param>-->
+    <!--        <init-param>-->
+    <!--            <param-name>mainEmail</param-name>-->
+    <!--            <param-value>blooper@wick.com</param-value>-->
+    <!--        </init-param>-->
+    <!--    </servlet>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>Email</servlet-name>-->
+    <!--        <url-pattern>/email</url-pattern>-->
+    <!--    </servlet-mapping>-->
+
+    <!--    xml方式实现Context初始化参数-->
+    <context-param>
+        <param-name>adminEmail</param-name>
+        <param-value>clientHeadError@whatfuck.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>dogBreed</param-name>
+        <param-value>Beagle</param-value>
+    </context-param>
+
+    <!--    注解注入-->
+    <!--    <env-entry>-->
+    <!--        <env-entry-name>adminEmail</env-entry-name>-->
+    <!--        <env-entry-type>java.lang.String</env-entry-type>-->
+    <!--        <env-entry-value>thankGod@whatisthis.com</env-entry-value>-->
+    <!--    </env-entry>-->
+    <!--    设置ContextListener-->
+    <!--    <listener>-->
+    <!--        <listener-class>Chapter6.MyServletContextListener</listener-class>-->
+    <!--    </listener>-->
+    <!--    <servlet>-->
+    <!--        <servlet-name>dogServlet </servlet-name>-->
+    <!--        <servlet-class>Chapter6.dogServlet</servlet-class>-->
+    <!--    </servlet>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>dogServlet</servlet-name>-->
+    <!--        <url-pattern>/dog2</url-pattern>-->
+    <!--    </servlet-mapping>-->
+    <!--&lt;!&ndash;    xml设置监听者&ndash;&gt;-->
+    <!--    <listener>-->
+    <!--        <listener-class>Chapter6.MyServletContextListener</listener-class>-->
+    <!--    </listener>-->
+
+    <!--    安全与授权-->
+    <!--    定义角色-->
+    <security-role>
+        <role-name>Admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Member</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Guest</role-name>
+    </security-role>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+    <!--    定义约束-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>UpdateRecipes</web-resource-name>
+            <url-pattern>/Beer/AddRecipe/*</url-pattern>
+            <url-pattern>/Beer/ReviewRecipe/*</url-pattern>
+
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+            <role-name>Member</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!--&lt;!&ndash;    声明过滤器&ndash;&gt;-->
+    <!--    <filter>-->
+    <!--        <filter-name>BeerRequestFilter</filter-name>-->
+    <!--        <filter-class>Chapter12.BeerRequestFilter</filter-class>-->
+    <!--        <init-param>-->
+    <!--            <param-name>LogFileName</param-name>-->
+    <!--            <param-value>UserLog.txt</param-value>-->
+    <!--        </init-param>-->
+    <!--    </filter>-->
+    <!--&lt;!&ndash;    声明对应URL模式的过滤器映射&ndash;&gt;-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>BeerRequestFilter</filter-name>-->
+    <!--        <url-pattern>*.do</url-pattern>-->
+    <!--&lt;!&ndash;        声明应用于请求分派器的模式&ndash;&gt;-->
+    <!--        <dispatcher>REQUEST</dispatcher>-->
+    <!--    </filter-mapping>-->
+    <!--&lt;!&ndash;    声明对应Servlet名的过滤器映射&ndash;&gt;-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>BeerRequestFilter</filter-name>-->
+    <!--        <servlet-name>ch1Servlet</servlet-name>-->
+    <!--    </filter-mapping>-->
+</web-app>

@@ -1,0 +1,44 @@
+@startuml ServletClass
+scale 1
+interface Servlet{
+    service(ServletRequest, ServletResponse)
+    init(ServletConfig)
+    destroy()
+    getServletConfig()
+    getServletInfo()
+}
+class GenericServlet{
+    init()
+    getInitParameter(String)
+    getInitParameterName()
+    getServletContext()
+    log(String)
+    log(String,Throwable)
+}
+
+class HttpServlet{
+    service(HttpServletRequest,HttpServletResponse)
+    doGet(HttpServletRequest,HttpServletResponse)
+    doPost(HttpServletRequest,HttpServletResponse)
+    doHead(HttpServletRequest,HttpServletResponse)
+    doOptions(HttpServletRequest,HttpServletResponse)
+    doPut(HttpServletRequest,HttpServletResponse)
+    doTrace(HttpServletRequest,HttpServletResponse)
+    doDelete(HttpServletRequest,HttpServletResponse)
+    getLastModified(HttpServletRequest,HttpServletResponse)
+}
+class MyServlet{
+    doPost(HttpServletRequest,HttpServletResponse)
+    myBizMethod()
+    //...
+}
+
+Servlet <|-- GenericServlet
+GenericServlet <|-- HttpServlet
+HttpServlet <|-- MyServlet
+
+note right of Servlet: 接口规定了所有 Servlet 都必须拥有的\n方法，其中<b>service,init和destory</b>\n是生命周期方法
+note right of GenericServlet: 该类是一个抽象类，但实现了大部\n分必需的 Servlet 方法，大部分\nservlet 行为都来自这个类
+note right of HttpServlet: 也是一个抽象类，实现了service方法来反映\nservlet的HTTP特性——它读取HTTP特定\n的请求和响应作为参数
+note right of MyServlet: 自己实现的类，只需要\n覆盖所需的HTTP方法
+@enduml

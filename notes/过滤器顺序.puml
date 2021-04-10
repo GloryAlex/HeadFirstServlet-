@@ -1,0 +1,29 @@
+@startuml 过滤器顺序
+scale 2
+left to right direction
+
+actor "客户" as user
+rectangle "容器" as container
+control "过滤器" as filter
+hexagon "Servlet" as servlet
+circle "请求" as request1
+circle "响应" as response1
+circle "请求" as request2
+circle "响应" as response2
+circle "响应" as response
+circle "输出流" as out
+
+user --> container
+container --> request1
+request1 -->  response1
+response1 --> filter
+filter --> request2
+request2 --> response2
+response2 --> servlet
+servlet --> filter
+filter --> container
+
+servlet --> response
+out --> user
+response --> out
+@enduml

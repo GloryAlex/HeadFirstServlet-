@@ -1,0 +1,16 @@
+@startuml Servlet Lifecycle
+
+entity Web容器 as tomcat
+participant Servlet类 as sClass
+control Serlvet对象 as servlet
+
+tomcat -> sClass: 加载类
+
+create servlet
+tomcat -> servlet: 初始化servlet
+tomcat -> servlet: init()
+tomcat -> servlet: service()
+servlet -> servlet: 执行客户请求
+tomcat -> servlet: destroy()
+destroy servlet
+@enduml

@@ -1,0 +1,30 @@
+@startuml servlet目录结构
+scale 2
+folder webapps
+folder MyApp
+folder "WEB-INF" as webinf
+folder "META-INF" as metainf
+artifact "useTag.jsp" as usetagjsp
+artifact "MANIFEST.MF" as manifestmf
+folder tags
+folder lib
+folder classes
+artifact "web.xml" as webxml
+artifact "MyHandler.class" as cs
+folder foo
+entity jar
+
+
+webapps --> MyApp
+MyApp --> metainf
+MyApp --> webinf
+MyApp --> usetagjsp
+metainf --> manifestmf
+webinf-->tags
+webinf-->lib
+webinf-->webxml
+lib-->jar
+webinf-->classes
+classes-->cs
+classes-->foo
+@enduml

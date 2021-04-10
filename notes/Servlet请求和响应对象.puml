@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ServletRequest{
+    getAttribute(String):Object
+    getContentLength():int
+    getInputStream():ServletInputStream
+    getLocalPort():int
+    getParameter(String):String
+    getParameterNames():Enumeration
+    //...more methods()
+}
+interface HttpServletRequest{
+    getContextPath():String
+    getCookies():Cookie[]
+    getHeader(String):String
+    getQueryString():String
+    getSession():HttpSession
+    getMethod():String
+    //...more methods()
+}
+
+interface ServletResponse{
+    getBufferSize():int
+    setContentType(String):void
+    setContentLength(int):void
+    getOutputStream():ServletOutputStream
+    getWriter():PrintWriter
+}
+
+interface HttpServletResponse{
+    addCookie(Cookie):void
+    addHeader(String name,String value):void
+    encodeRedirectURL(String url):String
+    sendError(int):void
+    setStatus(int):void
+}
+
+ServletRequest <|-- HttpServletRequest
+ServletResponse <|-- HttpServletResponse
+
+note bottom of HttpServletRequest: 增加了一些与HTTP有关的方法
+note bottom of HttpServletResponse: 响应也一样……
+@enduml
